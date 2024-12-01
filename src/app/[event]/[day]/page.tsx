@@ -2,22 +2,12 @@ import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
+import { Timestamp } from "@/components/timestamp";
+
 import { getLeaderboard } from "@/server/leaderboard";
 import { day, event, type Leaderboard } from "@/server/schema";
 
 import { path } from "@/utilities/url";
-
-const dateFormatter = new Intl.DateTimeFormat("en", {
-  day: "2-digit",
-  month: "short",
-});
-
-const timeFormatter = new Intl.DateTimeFormat("en", {
-  hour: "2-digit",
-  hour12: false,
-  minute: "2-digit",
-  second: "2-digit",
-});
 
 const parametersSchema = z.object({
   day: day(),
@@ -102,21 +92,22 @@ const AdventOfCodeLeaderboardDayPageList = async ({
           a.completion_day_level[day][part]!.get_star_ts -
           z.completion_day_level[day][part]!.get_star_ts,
       )
-      .map((member, index) => {
-        const timestamp =
-          1000 * member.completion_day_level[day][part]!.get_star_ts;
-
-        return (
-          <li className="col-span-full grid grid-cols-subgrid" key={member.id}>
-            <span className="text-end">{index + 1})</span>
-            <span className="opacity-50">
-              {dateFormatter.format(timestamp)}{" "}
-              <span className="px-ch">{timeFormatter.format(timestamp)}</span>
-            </span>
-            <span>{member.name}</span>
-          </li>
-        );
-      })}
+      .map((member, index, members) => (
+        <li className="col-span-full grid grid-cols-subgrid" key={member.id}>
+          <span className="text-end">
+            {member.local_score === members[index - 1]?.local_score
+              ? ""
+              : `${index + 1})`}
+          </span>
+          <Timestamp
+            className="flex gap-ch-2 pr-ch opacity-50"
+            timestamp={
+              1000 * member.completion_day_level[day][part]!.get_star_ts
+            }
+          />
+          <span>{member.name}</span>
+        </li>
+      ))}
   </ol>
 );
 

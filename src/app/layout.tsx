@@ -1,5 +1,8 @@
+import { Suspense } from "react";
+
 import type { Metadata } from "next";
 import { Source_Code_Pro } from "next/font/google";
+import { connection } from "next/server";
 
 import { Event } from "@/components/event";
 import { eventFormatters } from "@/components/event/formatters";
@@ -11,10 +14,6 @@ import { cx } from "@/utilities/classname";
 import { path } from "@/utilities/url";
 
 import "./style.css";
-
-import { Suspense } from "react";
-
-import { connection } from "next/server";
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
@@ -57,7 +56,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
   <html className={cx("[color-scheme:dark]", sourceCodePro.variable)} lang="en">
     <body className="min-h-dvh bg-slate-900 p-2 font-mono text-[length:min(3vw,1.1667rem)] font-light text-neutral-300 antialiased">
       <header className="mb-ch-3">
-        <nav className="gap-x-ch-2 flex items-start">
+        <nav className="flex items-start gap-x-ch-2">
           <div className="flex flex-col items-end">
             <Link
               className="whitespace-nowrap text-green-500 [text-shadow:0_0_2px_#00cc00,_0_0_5px_#00cc00]"
@@ -69,7 +68,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
               <DynamicEvent />
             </Suspense>
           </div>
-          <ul className="gap-x-ch-2 grid grid-cols-5">
+          <ul className="grid grid-cols-5 gap-x-ch-2">
             {event()
               .options.reverse()
               .map((event) => (

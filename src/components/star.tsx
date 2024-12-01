@@ -9,7 +9,6 @@ const star = cva({
     variant: {
       neutral: "text-neutral-700",
       slate: "text-slate-400",
-      transparent: "text-transparent",
       yellow: "text-yellow-200",
     },
   },

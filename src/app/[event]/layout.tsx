@@ -72,12 +72,16 @@ const AdventOfCodeLeaderboardLayout = async ({
           <ol className="col-span-full grid grid-cols-subgrid">
             {Object.values(leaderboard.members)
               .sort((a, z) => z.local_score - a.local_score)
-              .map((member, index) => (
+              .map((member, index, members) => (
                 <li
                   className="col-span-full grid grid-cols-subgrid"
                   key={member.id}
                 >
-                  <div className="text-end">{index + 1}) </div>
+                  <div className="text-end">
+                    {member.local_score === members[index - 1]?.local_score
+                      ? ""
+                      : `${index + 1})`}
+                  </div>
                   <div className="text-end">{member.local_score}</div>
                   <ol className="grid grid-cols-[repeat(25,minmax(0,1fr))]">
                     {Array.from({ length: 25 }, (_, index) => (
@@ -116,20 +120,16 @@ const AdventOfCodeLeaderboardLayoutListItem = ({
 
   return (
     <li>
-      <Star
-        variant={
-          now.getTime() <
-          new Date(
-            `${event}-12-${day.toString().padStart(2, "0")}T05:00:00.000Z`,
-          ).getTime()
-            ? "transparent"
-            : first && second
-              ? "yellow"
-              : first || second
-                ? "slate"
-                : "neutral"
-        }
-      />
+      {now.getTime() >=
+        new Date(
+          `${event}-12-${day.toString().padStart(2, "0")}T05:00:00.000Z`,
+        ).getTime() && (
+        <Star
+          variant={
+            first && second ? "yellow" : first || second ? "slate" : "neutral"
+          }
+        />
+      )}
     </li>
   );
 };
