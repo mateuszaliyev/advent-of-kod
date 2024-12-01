@@ -92,13 +92,9 @@ const AdventOfCodeLeaderboardDayPageList = async ({
           a.completion_day_level[day][part]!.get_star_ts -
           z.completion_day_level[day][part]!.get_star_ts,
       )
-      .map((member, index, members) => (
+      .map((member, index) => (
         <li className="col-span-full grid grid-cols-subgrid" key={member.id}>
-          <span className="text-end">
-            {member.local_score === members[index - 1]?.local_score
-              ? ""
-              : `${index + 1})`}
-          </span>
+          <span className="text-end">{index + 1})</span>
           <Timestamp
             className="flex gap-ch-2 pr-ch opacity-50"
             timestamp={
