@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import { eventFormatters } from "@/components/event/formatters";
 import { Link } from "@/components/link/styled";
 
-import { event as eventSchema } from "@/server/schema";
-
+import { event as eventSchema } from "@/utilities/schema";
 import { path } from "@/utilities/url";
 
 export const Event = ({ formatter }: { formatter: number }) => {

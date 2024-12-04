@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 import { environment } from "@/environment";
 
-import { event } from "@/server/schema";
+import { event } from "@/utilities/schema";
 
 export const GET = (request: NextRequest) => {
   const key = request.nextUrl.searchParams.get("key");

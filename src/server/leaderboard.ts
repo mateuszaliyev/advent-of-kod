@@ -2,7 +2,7 @@ import { unstable_cacheTag as cacheTag } from "next/cache";
 
 import { environment } from "@/environment";
 
-import * as schema from "@/server/schema";
+import * as schema from "@/utilities/schema";
 
 export const getLeaderboard = async (event: string) => {
   "use cache";

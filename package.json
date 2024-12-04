@@ -12,6 +12,7 @@
     "@t3-oss/env-nextjs": "0.11.1",
     "cva": "1.0.0-beta.2",
     "next": "15.0.4-canary.33",
+    "nuqs": "2.2.3",
     "react": "19.0.0-rc-b01722d5-20241114",
     "react-dom": "19.0.0-rc-b01722d5-20241114",
     "tailwind-merge": "2.5.5",

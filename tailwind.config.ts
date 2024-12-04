@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { transparent } from "tailwindcss/colors";
+import { transparent, white } from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 
 const hocus = plugin((api) => {
@@ -44,9 +44,23 @@ const hocus = plugin((api) => {
   );
 });
 
+const textShadow = plugin((api) => {
+  api.addUtilities({
+    ".text-shadow": {
+      "--tw-text-shadow-color": "currentColor",
+      textShadow: "0 0 5px var(--tw-text-shadow-color)",
+    },
+    ".text-shadow-lg": {
+      "--tw-text-shadow-color": "currentColor",
+      textShadow:
+        "0 0 2px var(--tw-text-shadow-color), 0 0 5px var(--tw-text-shadow-color)",
+    },
+  });
+});
+
 export default {
   content: ["./src/**/*.{js,jsx,mdx,ts,tsx}"],
-  plugins: [hocus],
+  plugins: [hocus, textShadow],
   theme: {
     colors: {
       green: {
@@ -63,6 +77,7 @@ export default {
         900: "#0f0f23",
       },
       transparent,
+      white,
       yellow: {
         200: "#ff6",
       },
